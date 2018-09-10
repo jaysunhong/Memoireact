@@ -11,11 +11,12 @@ class App extends Component {
   state = {
     isLoaded: false,
     items: [],
-    clicks: 0,
     isClicked: false,
-    chosenImageValue: null,
+    chosenImageValue: "",
+    clickedImages: [],
     score: 0,
-    highScore: 0
+    highScore: 0,
+    clicks: 0
   }
 
   style = {
@@ -46,10 +47,12 @@ class App extends Component {
     this.setState({
       isLoaded: false,
       items: [],
-      clicks: 0,
       isClicked: false,
-      chosenImageValue: null,
+      chosenImageValue: "",
+      clickedImages: [],
       score: 0,
+      highScore: 0,
+      clicks: 0
     });
 
     for (var j=0; j<12; j++) {
@@ -115,7 +118,7 @@ class App extends Component {
         <Container>
           <Row>
               {this.state.items.map((item, index) => 
-                <Col size="sm-3">
+                <Col key={item.id} size="sm-3">
                   <img
                     key={item.id}
                     id={`item${index}`}
@@ -128,36 +131,44 @@ class App extends Component {
 
                       this.setState({
                         isClicked: true,
-                        clicks: this.state.clicks + 1,
                         items: newArray,
-                        chosenImageValue: item.id
+                        chosenImageValue: item.id,
+                        clicks: this.state.clicks + 1,
+                        clickedImages: this.state.clickedImages.concat(this.state.chosenImageValue)
                       });
 
-                      if (this.state.clicks > 0) {
+                        console.log(this.state.clickedImages);
+                        console.log(this.state.clickedImages.length);
 
-                        if (this.state.chosenImageValue === item.id) {
+                        if (this.state.clicks > 0) {
+                    
+                          for (var h=1; h<this.state.clickedImages.length; h++) {
 
-                          this.setState({
-                            score: this.state.score + 1,
-                          });
+                            if (this.state.clickedImages[h] !== item.id) {
 
-                          if (this.state.score >= this.state.highScore) {
-                            this.setState({
-                              highScore: this.state.score + 1
-                            })
+                              this.setState({
+                                score: this.state.score + 1,
+                              });
+
+                              if (this.state.score >= this.state.highScore) {
+                                this.setState({
+                                  highScore: this.state.score + 1
+                                })
+                              }
+
+                            } else if (this.state.clickedImages[h] === item.id) {
+
+                              this.setState({
+                                score: 0,
+                                clicks: 0,
+                                chosenImageValue: "",
+                                clickedImages: [],
+                              });
+
+                            }
                           }
-
-                        } else {
-
-                          alert("you lose");
-
-                          this.setState({
-                            clicks: 0,
-                            score: 0,
-                            chosenImageValue: null
-                          });
                         }
-                      }
+                      
 
                     }}
                   /> 
