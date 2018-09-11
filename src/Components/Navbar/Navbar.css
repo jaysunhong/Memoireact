@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
+
+@keyframes btnResetAnimation {
+    from {color: red}
+    to {color: blue}
+}
+
+.navbarStyle {
+    background-color: black;
+    color: red;
+    font-family: 'Permanent Marker', cursive;
+}
+.navbarTitle {
+    color: red;
+}
+#btnReset {
+    cursor: pointer;
+}
+#btnReset:hover {
+    animation-name: btnResetAnimation;
+    animation-duration: 1s;
+    color: blue;
+}
+#btnReset:active {
+    color: red;
+}
