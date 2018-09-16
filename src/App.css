@@ -1,12 +1,9 @@
 body {
-  background-image: url("https://i.pinimg.com/originals/07/4b/69/074b69fed9fe6b0addf0270524cc83b9.jpg");
-  background-size: auto;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-color: lightcoral;
   text-align: center;
 }
 .styleImages {
-  width: 170px;
+  width: 200px;
   height: 200px;
   cursor: pointer;
   margin-top: 10px;

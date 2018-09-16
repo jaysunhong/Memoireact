@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import Container from "./Components/Grid/Container";
 import Navbar from "./Components/Navbar/Navbar";
-import superheroKey from "./Keys";
 import Row from "./Components/Grid/Row";
 import Col from "./Components/Grid/Col";
 
@@ -46,11 +45,10 @@ class App extends Component {
       clicks: 0
     });
 
-    for (var j=0; j<12; j++) {
+    for (var i=0; i<12; i++) {
 
       let randomCharacterId = this.getRandomInt(1, 731);
-      let url = `http://superheroapi.com/api/${superheroKey.access_token}/${randomCharacterId}`;
-
+      let url = `https://pokeapi.co/api/v2/pokemon-form/${randomCharacterId}`;
 
       fetch(url)
       .then(res => res.json())
@@ -69,14 +67,65 @@ class App extends Component {
       )  
     }
   }
-  
+
+  handleClicks = (item) => {
+    // shuffle array on click by calling shuffleArray function
+    let newArray = this.shuffleArray(this.state.items);
+
+    this.setState({
+      isClicked: true,
+      items: newArray,
+      chosenImageValue: item.id,
+      clicks: this.state.clicks + 1,
+      clickedImages: this.state.clickedImages.concat(this.state.chosenImageValue)
+    });
+
+      if (this.state.score === 12) {
+
+        alert("You win!");
+        
+        this.setState({
+          score: 0,
+          clicks: 0,
+          chosenImageValue: "",
+          clickedImages: [],
+        });
+      }
+
+      // run function if score is greater than or equal to the high score
+      if (this.state.score >= this.state.highScore) {
+        this.setState({
+          highScore: this.state.score
+        })
+      }
+
+      // increment state of score by 1 if the item id if the clicked image DOES NOT match the previous clicked items
+      if (this.state.clickedImages.indexOf(this.state.chosenImageValue) === -1) {
+
+        this.setState({
+          score: this.state.score + 1,
+        });
+      // alert user of loss and set state back to default values if the item id if the clicked image DOES match the previous clicked items
+      } 
+      if (this.state.clickedImages.indexOf(this.state.chosenImageValue) !== -1) {
+
+        alert("You lose. Try again.");
+
+        this.setState({
+          score: 0,
+          clicks: 0,
+          chosenImageValue: "",
+          clickedImages: [],
+        });
+      } 
+  }
+
   componentDidMount = () => {
 
     for (var i=0; i<12; i++) {
 
       let randomCharacterId = this.getRandomInt(1, 731);
-      let url = `http://superheroapi.com/api/${superheroKey.access_token}/${randomCharacterId}`;
-
+      let url = `https://pokeapi.co/api/v2/pokemon-form/${randomCharacterId}`;
 
       fetch(url)
       .then(res => res.json())
@@ -94,7 +143,6 @@ class App extends Component {
         }
       )  
     }
-
   }
 
   render() {
@@ -112,61 +160,10 @@ class App extends Component {
                   <img
                     key={item.id}
                     id={`item${index}`}
-                    src={item.image.url}
+                    src={item.sprites.front_default}
                     className="styleImages"
-                    alt={item.image.url}
-                    onClick={() => {
-                      // shuffle array on click by calling shuffleArray function
-                      let newArray = this.shuffleArray(this.state.items);
-
-                      this.setState({
-                        isClicked: true,
-                        items: newArray,
-                        chosenImageValue: item.id,
-                        clicks: this.state.clicks + 1,
-                        clickedImages: this.state.clickedImages.concat(this.state.chosenImageValue)
-                      });
-
-                        if (this.state.clicks > 0) {
-                          // increment state of score by 1 if the item id if the clicked image DOES NOT match the previous clicked items
-                          if (this.state.clickedImages.indexOf(item.id) === -1) {
-
-                            this.setState({
-                              score: this.state.score + 1,
-                            });
-                          // alert user of loss and set state back to default values if the item id if the clicked image DOES match the previous clicked items
-                          } else if (this.state.clickedImages.indexOf(item.id) !== -1) {
-
-                            alert("You lose. Try again.");
-
-                            this.setState({
-                              score: 0,
-                              clicks: 0,
-                              chosenImageValue: "",
-                              clickedImages: [],
-                            });
-                          }  else if (this.state.score === 12) {
-
-                            alert("You win!");
-                            
-                            this.setState({
-                              score: 0,
-                              clicks: 0,
-                              chosenImageValue: "",
-                              clickedImages: [],
-                            });
-                          }
-
-                          // run function if score is greater than or equal to the high score
-                          if (this.state.score >= this.state.highScore) {
-                            this.setState({
-                              highScore: this.state.score
-                            })
-                          } 
-                         
-                        }
-
-                    }}
+                    alt={item.sprites.front_default}
+                    onClick={() => this.handleClicks(item)}
                   /> 
                 </Col>
               )}
