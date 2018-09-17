@@ -147,29 +147,31 @@ class App extends Component {
 
   render() {
     return (
-      <React.Fragment>
-        <Navbar 
-          score={this.state.score}
-          highScore={this.state.highScore}
-          onClick={this.onReset}
-        />
-        <Container>
-          <Row>
-              {this.state.items.map((item, index) => 
-                <Col key={item.id} size="sm-3">
-                  <img
-                    key={item.id}
-                    id={`item${index}`}
-                    src={item.sprites.front_default}
-                    className="styleImages"
-                    alt={item.sprites.front_default}
-                    onClick={() => this.handleClicks(item)}
-                  /> 
-                </Col>
-              )}
-          </Row>
-        </Container>
-      </React.Fragment>
+      <Router>
+        <React.Fragment>
+          <Navbar 
+            score={this.state.score}
+            highScore={this.state.highScore}
+            onClick={this.onReset}
+          />
+          <Container>
+            <Row>
+                {this.state.items.map((item, index) => 
+                  <Col key={item.id} size="sm-3">
+                    <img
+                      key={item.id}
+                      id={`item${index}`}
+                      src={item.sprites.front_default}
+                      className="styleImages"
+                      alt={item.sprites.front_default}
+                      onClick={() => this.handleClicks(item)}
+                    /> 
+                  </Col>
+                )}
+            </Row>
+          </Container>
+        </React.Fragment>
+      </Router>
     )
   }
 }
