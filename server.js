@@ -5,6 +5,11 @@ var PORT = process.env.PORT || 3001;
 
 require("./server/routing/htmlRoutes.js")(app);
 
+// Serve up static assets (usually on heroku)
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static("/client/public"));
 // parse application/x-www-form-urlencoded
