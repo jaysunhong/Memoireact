@@ -3,14 +3,11 @@ var bodyParser = require("body-parser");
 var app = express();
 var PORT = process.env.PORT || 3001;
 
-// require("./server/routing/htmlRoutes.js")(app);
+require("./server/routing/htmlRoutes.js")(app);
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, './client/public')));
-  app.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, "./client/public/index.html"));
-  });
+  app.use(express.static("client/build"));
 }
 
 // Serve static content for the app from the "public" directory in the application directory.
