@@ -11,7 +11,6 @@ class App extends Component {
     isLoaded: false,
     items: [],
     isClicked: false,
-    chosenImageValue: "",
     clickedImages: [],
     score: 0,
     highScore: 0,
@@ -38,7 +37,6 @@ class App extends Component {
       isLoaded: false,
       items: [],
       isClicked: false,
-      chosenImageValue: "",
       clickedImages: [],
       score: 0,
       highScore: 0,
@@ -71,13 +69,13 @@ class App extends Component {
   handleClicks = (item) => {
     // shuffle array on click by calling shuffleArray function
     let newArray = this.shuffleArray(this.state.items);
+    let chosenImageValue = item.id;
 
     this.setState({
       isClicked: true,
       items: newArray,
-      chosenImageValue: item.id,
       clicks: this.state.clicks + 1,
-      clickedImages: this.state.clickedImages.concat(this.state.chosenImageValue)
+      clickedImages: this.state.clickedImages.concat(item.id)
     });
 
       if (this.state.score === 12) {
@@ -87,7 +85,6 @@ class App extends Component {
         this.setState({
           score: 0,
           clicks: 0,
-          chosenImageValue: "",
           clickedImages: [],
         });
       }
@@ -100,24 +97,25 @@ class App extends Component {
       }
 
       // increment state of score by 1 if the item id if the clicked image DOES NOT match the previous clicked items
-      if (this.state.clickedImages.indexOf(this.state.chosenImageValue) === -1) {
+      if (this.state.clickedImages.indexOf(chosenImageValue) === -1) {
 
         this.setState({
           score: this.state.score + 1,
         });
       // alert user of loss and set state back to default values if the item id if the clicked image DOES match the previous clicked items
       } 
-      if (this.state.clickedImages.indexOf(this.state.chosenImageValue) !== -1) {
+      if (this.state.clickedImages.indexOf(chosenImageValue) !== -1) {
 
         alert("You lose. Try again.");
 
         this.setState({
           score: 0,
           clicks: 0,
-          chosenImageValue: "",
           clickedImages: [],
         });
       } 
+      console.log(this.state.clickedImages);
+      console.log(chosenImageValue);
   }
 
   componentDidMount = () => {
