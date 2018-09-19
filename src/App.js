@@ -45,7 +45,7 @@ class App extends Component {
 
     for (var i=0; i<12; i++) {
 
-      let randomCharacterId = this.getRandomInt(1, 731);
+      let randomCharacterId = this.getRandomInt(1, 802);
       let url = `https://pokeapi.co/api/v2/pokemon-form/${randomCharacterId}`;
 
       fetch(url)
@@ -89,13 +89,6 @@ class App extends Component {
         });
       }
 
-      // run function if score is greater than or equal to the high score
-      if (this.state.score >= this.state.highScore) {
-        this.setState({
-          highScore: this.state.score
-        })
-      }
-
       // increment state of score by 1 if the item id if the clicked image DOES NOT match the previous clicked items
       if (this.state.clickedImages.indexOf(chosenImageValue) === -1) {
 
@@ -114,15 +107,25 @@ class App extends Component {
           clickedImages: [],
         });
       } 
-      console.log(this.state.clickedImages);
-      console.log(chosenImageValue);
+
+      setTimeout (
+          function() {
+            // run function if score is greater than or equal to the high score
+            if (this.state.score >= this.state.highScore) {
+              this.setState({
+                highScore: this.state.score
+              })
+            }
+          }
+        .bind(this),
+      0.0001 * 1000);
+
   }
 
-  componentDidMount = () => {
-
+  fetchApi = () => {
     for (var i=0; i<12; i++) {
 
-      let randomCharacterId = this.getRandomInt(1, 731);
+      let randomCharacterId = this.getRandomInt(1, 802);
       let url = `https://pokeapi.co/api/v2/pokemon-form/${randomCharacterId}`;
 
       fetch(url)
@@ -135,12 +138,15 @@ class App extends Component {
             isLoaded: true,
             items: array
         });
-
       }, (error) => {
           console.log(error);
         }
       )  
     }
+  }
+
+  componentDidMount = () => {
+    this.fetchApi();
   }
 
   render() {
