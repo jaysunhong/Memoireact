@@ -11,7 +11,7 @@ class Navbar extends Component {
                     Score: {this.props.score} | High Score: {this.props.highScore}
                 </div>
                 <div id="btnReset" onClick={this.props.onClick}>
-                    Click here to catch new Pokemon!
+                    Catch new Pokemon?
                 </div>
             </nav>
         )

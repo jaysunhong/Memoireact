@@ -14,7 +14,6 @@ class App extends Component {
     clickedImages: [],
     score: 0,
     highScore: 0,
-    clicks: 0
   }
 
   getRandomInt = (min, max) => {
@@ -40,7 +39,6 @@ class App extends Component {
       clickedImages: [],
       score: 0,
       highScore: 0,
-      clicks: 0
     });
 
     for (var i=0; i<12; i++) {
@@ -74,7 +72,6 @@ class App extends Component {
     this.setState({
       isClicked: true,
       items: newArray,
-      clicks: this.state.clicks + 1,
       clickedImages: this.state.clickedImages.concat(item.id)
     });
 
@@ -84,7 +81,6 @@ class App extends Component {
         
         this.setState({
           score: 0,
-          clicks: 0,
           clickedImages: [],
         });
       }
@@ -102,7 +98,6 @@ class App extends Component {
 
         this.setState({
           score: 0,
-          clicks: 0,
           clickedImages: [],
         });
       } 
