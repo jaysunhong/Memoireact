@@ -1,0 +1,11 @@
+.btnModalClose {
+    background-color: lightblue;
+}
+.modal-body {
+    background-color: lightblue;
+    color: black;
+    text-shadow: none;
+}
+.modal-header, .modal-footer {
+    background-color: lightcoral;
+}

@@ -17,7 +17,7 @@
 .score {
     font-size: 18px;
 }
-#btnReset {
+#btnInstructions, #btnReset {
     cursor: pointer;
     font-size: 18px;
 }
@@ -28,5 +28,14 @@
     text-shadow: 4px 4px 4px black;
 }
 #btnReset:active {
+    color: yellow;
+}
+#btnInstructions:hover {
+    animation-name: btnResetAnimation;
+    animation-duration: 1s;
+    color: lightcoral;
+    text-shadow: 4px 4px 4px black;
+}
+#btnInstructions:active {
     color: yellow;
 }
