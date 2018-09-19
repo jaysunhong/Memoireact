@@ -96,8 +96,7 @@ class App extends Component {
           score: this.state.score + 1,
         });
       // alert user of loss and set state back to default values if the item id if the clicked image DOES match the previous clicked items
-      } 
-      if (this.state.clickedImages.indexOf(chosenImageValue) !== -1) {
+      } else if (this.state.clickedImages.indexOf(chosenImageValue) !== -1) {
 
         alert("You lose. Try again.");
 
@@ -119,7 +118,6 @@ class App extends Component {
           }
         .bind(this),
       0.0001 * 1000);
-
   }
 
   fetchApi = () => {
