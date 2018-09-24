@@ -41,30 +41,9 @@ class App extends Component {
       isClicked: false,
       clickedImages: [],
       score: 0,
-      highScore: 0,
     });
 
-    for (var i=0; i<12; i++) {
-
-      let randomCharacterId = this.getRandomInt(1, 802);
-      let url = `https://pokeapi.co/api/v2/pokemon-form/${randomCharacterId}`;
-
-      fetch(url)
-      .then(res => res.json())
-      .then((result) => {
-
-        let array = this.state.items.concat(result);
-
-        this.setState({
-            isLoaded: true,
-            items: array
-        });
-
-      }, (error) => {
-          console.log(error);
-        }
-      )  
-    }
+    this.fetchApi();
   }
 
   handleClicks = (item) => {
