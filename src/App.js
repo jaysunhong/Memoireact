@@ -4,7 +4,6 @@ import Container from "./Components/Grid/Container";
 import Navbar from "./Components/Navbar/Navbar";
 import Row from "./Components/Grid/Row";
 import Col from "./Components/Grid/Col";
-import Modal from "./Components/Modal/Modal";
 import dataArray from "./Data";
 
 class App extends Component {
@@ -91,28 +90,6 @@ class App extends Component {
       0.0001 * 1000);
   }
 
-  // fetchApi = () => {
-  //   for (var i=0; i<12; i++) {
-
-  //     let randomCharacterId = this.getRandomInt(1, 802);
-  //     let url = `https://pokeapi.co/api/v2/pokemon-form/${randomCharacterId}`;
-
-  //     fetch(url)
-  //     .then(res => res.json())
-  //     .then((result) => {
-
-  //       let array = this.state.items.concat(result);
-
-  //       this.setState({
-  //           items: array
-  //       });
-  //     }, (error) => {
-  //         console.log(error);
-  //       }
-  //     )  
-  //   }
-  // }
-
   getImageData = () => {
     const checkArray = [];
 
@@ -143,7 +120,6 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    // this.fetchApi();
     this.getImageData();
   }
 
@@ -159,17 +135,13 @@ class App extends Component {
           <Row>
               {this.state.items.map((item, index) => 
                 <Col 
-                  // key={item.id}
                   key={`item${index}`}
                   size="sm-3">
                   <img
-                    // key={item.id}
                     key={`item${index}`}
                     id={`item${index}`}
-                    // src={item.sprites.front_default}
                     src={item}
                     className="styleImages"
-                    // alt={item.sprites.front_default}
                     alt={item}
                     onClick={() => this.handleClicks(item)}
                   /> 

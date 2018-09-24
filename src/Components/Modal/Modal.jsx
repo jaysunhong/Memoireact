@@ -14,7 +14,7 @@ const Modal = () => {
                     </div>
                     <div className="modal-body">
                         Welcome to Pokemon Memoireact! This game tests your memorization through clicks. Your objective is to click a different Pokemon with every click. With each click,
-                        the Pokemon will shuffle in a random order. If you click a Pokemon that you have already previously clicked, then you lose.
+                        the Pokemon will shuffle in a random order. If you click a Pokemon that has already been previously clicked, then you lose.
                         <br></br>
                         <br></br>
                         Try to catch all 12 Pokemon! Good luck!
