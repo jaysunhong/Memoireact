@@ -5,13 +5,12 @@ import Navbar from "./Components/Navbar/Navbar";
 import Row from "./Components/Grid/Row";
 import Col from "./Components/Grid/Col";
 import Modal from "./Components/Modal/Modal";
+import dataArray from "./Data";
 
 class App extends Component {
 
   state = {
-    isLoaded: false,
     items: [],
-    isClicked: false,
     clickedImages: [],
     score: 0,
     highScore: 0,
@@ -34,9 +33,7 @@ class App extends Component {
 
   onReset = () => {
     this.setState({
-      isLoaded: false,
       items: [],
-      isClicked: false,
       clickedImages: [],
       score: 0,
       highScore: 0,
@@ -54,7 +51,6 @@ class App extends Component {
         let array = this.state.items.concat(result);
 
         this.setState({
-            isLoaded: true,
             items: array
         });
 
@@ -68,12 +64,11 @@ class App extends Component {
   handleClicks = (item) => {
     // shuffle array on click by calling shuffleArray function
     let newArray = this.shuffleArray(this.state.items);
-    let chosenImageValue = item.id;
+    let chosenImageValue = item;
 
     this.setState({
-      isClicked: true,
       items: newArray,
-      clickedImages: this.state.clickedImages.concat(item.id)
+      clickedImages: this.state.clickedImages.concat(item)
     });
 
       if (this.state.score === 12) {
@@ -116,31 +111,60 @@ class App extends Component {
       0.0001 * 1000);
   }
 
-  fetchApi = () => {
-    for (var i=0; i<12; i++) {
+  // fetchApi = () => {
+  //   for (var i=0; i<12; i++) {
 
-      let randomCharacterId = this.getRandomInt(1, 802);
-      let url = `https://pokeapi.co/api/v2/pokemon-form/${randomCharacterId}`;
+  //     let randomCharacterId = this.getRandomInt(1, 802);
+  //     let url = `https://pokeapi.co/api/v2/pokemon-form/${randomCharacterId}`;
 
-      fetch(url)
-      .then(res => res.json())
-      .then((result) => {
+  //     fetch(url)
+  //     .then(res => res.json())
+  //     .then((result) => {
 
-        let array = this.state.items.concat(result);
+  //       let array = this.state.items.concat(result);
 
-        this.setState({
-            isLoaded: true,
-            items: array
-        });
-      }, (error) => {
-          console.log(error);
+  //       this.setState({
+  //           items: array
+  //       });
+  //     }, (error) => {
+  //         console.log(error);
+  //       }
+  //     )  
+  //   }
+  // }
+
+  getImageData = () => {
+    const checkArray = [];
+
+    for (var q=0; q<27; q++) {
+
+      if (checkArray.length === 12) {
+        break;
+      } else {
+
+        var randomCharacterId = this.getRandomInt(0, 27);
+
+        if (checkArray.indexOf(randomCharacterId) === -1) {
+
+          checkArray.push(randomCharacterId);
+          let grabArray = dataArray[randomCharacterId];
+
+          setTimeout (
+            function() {
+              this.setState({
+                items: this.state.items.concat(grabArray)
+              })
+            }
+          .bind(this),
+          0.0001 * 1000);
         }
-      )  
+      }
     }
   }
 
   componentDidMount = () => {
-    this.fetchApi();
+    // this.fetchApi();
+    this.getImageData();
   }
 
   render() {
@@ -154,13 +178,19 @@ class App extends Component {
         <Container>
           <Row>
               {this.state.items.map((item, index) => 
-                <Col key={item.id} size="sm-3">
+                <Col 
+                  // key={item.id}
+                  key={`item${index}`}
+                  size="sm-3">
                   <img
-                    key={item.id}
+                    // key={item.id}
+                    key={`item${index}`}
                     id={`item${index}`}
-                    src={item.sprites.front_default}
+                    // src={item.sprites.front_default}
+                    src={item}
                     className="styleImages"
-                    alt={item.sprites.front_default}
+                    // alt={item.sprites.front_default}
+                    alt={item}
                     onClick={() => this.handleClicks(item)}
                   /> 
                 </Col>
