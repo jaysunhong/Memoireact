@@ -6,7 +6,6 @@ import Container from "./Components/Grid/Container";
 import Navbar from "./Components/Navbar/Navbar";
 import Row from "./Components/Grid/Row";
 import Col from "./Components/Grid/Col";
-import Modal from "./Components/Modal/Modal";
 
 class App extends Component {
 
