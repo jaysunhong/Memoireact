@@ -1,13 +1,14 @@
-* Jason Hong
+# Pokemon Memoireact
 
-## Pokemon Memoireact
-
-### Technologies:
+### Technologies Used:
 * React.js
 
 ### Project Description:
 Welcome to Pokemon Memoireact! This game tests your memorization through clicks. Your objective is to click a different Pokemon with every click. With each click,
 the Pokemon will shuffle in a random order. If you click a Pokemon that has already been previously clicked, then you lose.
+
+### How to Play:
+![dbVisualization](./readmeAssets/dbVisualization.png)
 
 #### Front End
 * Landing page layout
