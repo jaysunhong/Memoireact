@@ -8,7 +8,10 @@ Welcome to Pokemon Memoireact! This game tests your memorization through clicks.
 the Pokemon will shuffle in a random order. If you click a Pokemon that has already been previously clicked, then you lose.
 
 ### How to Play:
-![dbVisualization](./readmeAssets/dbVisualization.png)
+![How to Play](./readmeAssets/gameExample.gif)
+
+### How to Catch New Pokemon:
+![How to Catch New Pokemon](./readmeAssets/catchNewPokemon.gif)
 
 #### Front End
 * Landing page layout
